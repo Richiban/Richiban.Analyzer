@@ -9,6 +9,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReturnValueUsageAnalyzer.Te
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReturnValueUsageAnalyzer.Vsix", "ReturnValueUsageAnalyzer\ReturnValueUsageAnalyzer.Vsix\ReturnValueUsageAnalyzer.Vsix.csproj", "{9AC2FAFB-B9E2-4A30-A4F2-B7B748A8D2D6}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ReturnValueUsage", "ReturnValueUsage", "{D6AF1B6B-0B9E-4ADD-907B-4D8934E2FD85}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ImmutableValue", "ImmutableValue", "{BC4B4596-F900-4F5B-B3F4-8AC07B11D8C4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImmutableValueAnalyzer", "ImmutableValueAnalyzer\ImmutableValueAnalyzer\ImmutableValueAnalyzer.csproj", "{72F35381-9C7E-4EC1-983D-425C2F03612F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImmutableValueAnalyzer.Test", "ImmutableValueAnalyzer\ImmutableValueAnalyzer.Test\ImmutableValueAnalyzer.Test.csproj", "{D141E3B3-561F-48C7-9F2F-D47CD2DE88EC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImmutableValueAnalyzer.Vsix", "ImmutableValueAnalyzer\ImmutableValueAnalyzer.Vsix\ImmutableValueAnalyzer.Vsix.csproj", "{E248A451-ED96-4855-A321-F16D3CD3F972}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,8 +37,28 @@ Global
 		{9AC2FAFB-B9E2-4A30-A4F2-B7B748A8D2D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9AC2FAFB-B9E2-4A30-A4F2-B7B748A8D2D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9AC2FAFB-B9E2-4A30-A4F2-B7B748A8D2D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72F35381-9C7E-4EC1-983D-425C2F03612F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72F35381-9C7E-4EC1-983D-425C2F03612F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72F35381-9C7E-4EC1-983D-425C2F03612F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72F35381-9C7E-4EC1-983D-425C2F03612F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D141E3B3-561F-48C7-9F2F-D47CD2DE88EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D141E3B3-561F-48C7-9F2F-D47CD2DE88EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D141E3B3-561F-48C7-9F2F-D47CD2DE88EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D141E3B3-561F-48C7-9F2F-D47CD2DE88EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E248A451-ED96-4855-A321-F16D3CD3F972}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E248A451-ED96-4855-A321-F16D3CD3F972}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E248A451-ED96-4855-A321-F16D3CD3F972}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E248A451-ED96-4855-A321-F16D3CD3F972}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F46D4883-BF96-4230-8618-BC2945062EBC} = {D6AF1B6B-0B9E-4ADD-907B-4D8934E2FD85}
+		{3A4205C5-819A-4C6E-8B09-FC6A2A6730C6} = {D6AF1B6B-0B9E-4ADD-907B-4D8934E2FD85}
+		{9AC2FAFB-B9E2-4A30-A4F2-B7B748A8D2D6} = {D6AF1B6B-0B9E-4ADD-907B-4D8934E2FD85}
+		{72F35381-9C7E-4EC1-983D-425C2F03612F} = {BC4B4596-F900-4F5B-B3F4-8AC07B11D8C4}
+		{D141E3B3-561F-48C7-9F2F-D47CD2DE88EC} = {BC4B4596-F900-4F5B-B3F4-8AC07B11D8C4}
+		{E248A451-ED96-4855-A321-F16D3CD3F972} = {BC4B4596-F900-4F5B-B3F4-8AC07B11D8C4}
 	EndGlobalSection
 EndGlobal
