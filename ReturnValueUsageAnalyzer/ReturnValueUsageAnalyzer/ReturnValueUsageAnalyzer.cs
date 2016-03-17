@@ -53,7 +53,12 @@ namespace ReturnValueUsageAnalyzer
             if (expressionStatementSyntax == null)
                 return;
 
-            var typeInfo = context.SemanticModel.GetTypeInfo(expressionStatementSyntax.Expression);
+            var expression = expressionStatementSyntax.Expression;
+
+            if (expression.Kind() == SyntaxKind.SimpleAssignmentExpression)
+                return;
+
+            var typeInfo = context.SemanticModel.GetTypeInfo(expression);
 
             if (typeInfo.Type.SpecialType != SpecialType.System_Void)
             {
