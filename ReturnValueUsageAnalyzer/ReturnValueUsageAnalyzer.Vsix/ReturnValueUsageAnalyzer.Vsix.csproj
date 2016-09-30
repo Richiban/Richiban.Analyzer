@@ -13,8 +13,8 @@
     <ProjectGuid>{9AC2FAFB-B9E2-4A30-A4F2-B7B748A8D2D6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Analyzer1.Vsix</RootNamespace>
-    <AssemblyName>Analyzer1.Vsix</AssemblyName>
+    <RootNamespace>Richiban.ReturnUsageAnalyzer.Vsix</RootNamespace>
+    <AssemblyName>Richiban.ReturnUsageAnalyzer.Vsix</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <GeneratePkgDefFile>false</GeneratePkgDefFile>
     <IncludeAssemblyInVSIXContainer>false</IncludeAssemblyInVSIXContainer>

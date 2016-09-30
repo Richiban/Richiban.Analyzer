@@ -3,7 +3,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TestHelper;
 
-namespace Analyzer1.Test
+namespace ReturnValueUsageAnalyzer.Test
 {
     [TestClass]
     public class UnitTest : CodeFixVerifier
@@ -47,7 +47,7 @@ namespace ConsoleApplication1
 }";
             var expected = new DiagnosticResult
             {
-                Id = nameof(ReturnValueUsageAnalyzer.ReturnValueUsageAnalyzer),
+                Id = nameof(Richiban.ReturnUsageAnalyzer.ReturnValueUsageAnalyzer),
                 Message = "The returned value of type 'string' is not used.",
                 Severity = DiagnosticSeverity.Warning,
                 Locations =
@@ -59,6 +59,6 @@ namespace ConsoleApplication1
             VerifyCSharpDiagnostic(test, expected);
         }
 
-        protected override DiagnosticAnalyzer GetCSharpDiagnosticAnalyzer() => new ReturnValueUsageAnalyzer.ReturnValueUsageAnalyzer();
+        protected override DiagnosticAnalyzer GetCSharpDiagnosticAnalyzer() => new Richiban.ReturnUsageAnalyzer.ReturnValueUsageAnalyzer();
     }
 }

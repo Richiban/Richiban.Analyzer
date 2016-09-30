@@ -4,7 +4,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 
-namespace ReturnValueUsageAnalyzer
+namespace Richiban.ReturnUsageAnalyzer
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public class ReturnValueUsageAnalyzer : DiagnosticAnalyzer
@@ -14,19 +14,19 @@ namespace ReturnValueUsageAnalyzer
         private static readonly LocalizableString Title = new LocalizableResourceString(
             nameof(Resources.AnalyzerTitle),
             Resources.ResourceManager,
-            typeof (Resources));
+            typeof(Resources));
 
         private static readonly LocalizableString MessageFormat =
             new LocalizableResourceString(
                 nameof(Resources.AnalyzerMessageFormat),
                 Resources.ResourceManager,
-                typeof (Resources));
+                typeof(Resources));
 
         private static readonly LocalizableString Description =
             new LocalizableResourceString(
                 nameof(Resources.AnalyzerDescription),
                 Resources.ResourceManager,
-                typeof (Resources));
+                typeof(Resources));
 
         private const string Category = "Functional";
 
@@ -60,10 +60,18 @@ namespace ReturnValueUsageAnalyzer
 
             var typeInfo = context.SemanticModel.GetTypeInfo(expression);
 
-            if (typeInfo.Type.SpecialType != SpecialType.System_Void)
-            {
-                ReportDiagnostic(typeInfo, context, expressionStatementSyntax.GetLocation());
-            }
+            if (ShouldIgnoreExpressionType(typeInfo))
+                return;
+
+            ReportDiagnostic(typeInfo, context, expressionStatementSyntax.GetLocation());
+        }
+
+        private static bool ShouldIgnoreExpressionType(TypeInfo typeInfo)
+        {
+            var specialType = typeInfo.Type?.SpecialType;
+
+            return typeInfo.Type?.TypeKind == TypeKind.Dynamic || specialType == null ||
+                   specialType == SpecialType.System_Void;
         }
 
         private void ReportDiagnostic(TypeInfo typeInfo, SyntaxNodeAnalysisContext context, Location location)
