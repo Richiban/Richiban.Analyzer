@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -69,8 +70,10 @@ namespace Richiban.ReturnUsageAnalyzer
         private static bool ShouldIgnoreExpressionType(TypeInfo typeInfo)
         {
             var specialType = typeInfo.Type?.SpecialType;
+            var typeName = typeInfo.Type?.Name;
 
-            return typeInfo.Type?.TypeKind == TypeKind.Dynamic || specialType == null ||
+            return "Unit".Equals(typeName, StringComparison.OrdinalIgnoreCase) ||
+                   typeInfo.Type?.TypeKind == TypeKind.Dynamic || specialType == null ||
                    specialType == SpecialType.System_Void;
         }
 
