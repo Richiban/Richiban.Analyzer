@@ -11,7 +11,7 @@ namespace ReturnValueUsageAnalyzer.Test
 
         //No diagnostics expected to show up
         [TestMethod]
-        public void TestMethod1()
+        public void EmpytSourceDoesNotTriggerDiagnostic()
         {
             var test = @"";
 
@@ -20,15 +20,10 @@ namespace ReturnValueUsageAnalyzer.Test
 
         //Diagnostic and CodeFix both triggered and checked for
         [TestMethod]
-        public void TestMethod2()
+        public void UnusedStringReturnTypeTriggersDiagnostic()
         {
             var test = @"
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Diagnostics;
 
 namespace ConsoleApplication1
 {
@@ -52,11 +47,92 @@ namespace ConsoleApplication1
                 Severity = DiagnosticSeverity.Warning,
                 Locations =
                     new[] {
-                            new DiagnosticResultLocation("Test0.cs", line: 15, column: 13)
+                            new DiagnosticResultLocation("Test0.cs", line: 10, column: 13)
                         }
             };
 
             VerifyCSharpDiagnostic(test, expected);
+        }
+
+        //Diagnostic and CodeFix both triggered and checked for
+        [TestMethod]
+        public void UnitDoesNotTriggerDiagnostic()
+        {
+            var test = @"
+using System;
+
+namespace ConsoleApplication1
+{
+    class TypeName
+    {
+        public void A()
+        {
+            B();
+        }
+
+        public Unit B()
+        {
+            return new Unit();
+        }
+    }
+
+    class Unit
+    {
+    }
+}";
+
+            VerifyCSharpDiagnostic(test);
+        }
+
+        //Diagnostic and CodeFix both triggered and checked for
+        [TestMethod]
+        public void DynamicDoesNotTriggerDiagnostic()
+        {
+            var test = @"
+using System;
+
+namespace ConsoleApplication1
+{
+    class TypeName
+    {
+        public void A()
+        {
+            B();
+        }
+
+        public dynamic B()
+        {
+            return new object();
+        }
+    }
+}";
+
+            VerifyCSharpDiagnostic(test);
+        }
+
+        //Diagnostic and CodeFix both triggered and checked for
+        [TestMethod]
+        public void CompilerErrorDoesNotTriggerDiagnostic()
+        {
+            var test = @"
+using System;
+
+namespace ConsoleApplication1
+{
+    class TypeName
+    {
+        public void A()
+        {
+            B();
+        }
+    }
+
+    class Unit
+    {
+    }
+}";
+
+            VerifyCSharpDiagnostic(test);
         }
 
         protected override DiagnosticAnalyzer GetCSharpDiagnosticAnalyzer() => new Richiban.ReturnUsageAnalyzer.ReturnValueUsageAnalyzer();

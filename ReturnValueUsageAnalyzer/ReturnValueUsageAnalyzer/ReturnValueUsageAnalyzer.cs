@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -69,12 +71,16 @@ namespace Richiban.ReturnUsageAnalyzer
 
         private static bool ShouldIgnoreExpressionType(TypeInfo typeInfo)
         {
-            var specialType = typeInfo.Type?.SpecialType;
-            var typeName = typeInfo.Type?.Name;
+            var rules = new List<Func<ITypeSymbol, bool>>
+            {
+                type => "Unit".Equals(type?.Name, StringComparison.OrdinalIgnoreCase),
+                type => type?.Name == null,
+                type => type?.TypeKind == TypeKind.Error,
+                type => type?.TypeKind == TypeKind.Dynamic,
+                type => type?.SpecialType == SpecialType.System_Void
+            };
 
-            return "Unit".Equals(typeName, StringComparison.OrdinalIgnoreCase) ||
-                   typeInfo.Type?.TypeKind == TypeKind.Dynamic || specialType == null ||
-                   specialType == SpecialType.System_Void;
+            return rules.Any(rule => rule(typeInfo.Type));
         }
 
         private void ReportDiagnostic(TypeInfo typeInfo, SyntaxNodeAnalysisContext context, Location location)
